@@ -28,43 +28,43 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-import Scroll from "../../base/scroll/scroll";
-import Slider from "../../base/slider/slider";
-import { getRecommend,getDiscList } from "../../api/recommend";
-import { ERR_OK } from "../../api/config";
+import Scroll from 'base/scroll/scroll'
+import Slider from 'base/slider/slider'
+import { getRecommend, getDiscList } from 'api/recommend'
+import { ERR_OK } from 'api/config'
 export default {
-  data() {
+  data () {
     return {
       recommends: [],
-      discList:[],
-    };
+      discList: []
+    }
   },
-  created() {
-    this._getRecommend();
-    this._getDiscList();
+  created () {
+    this._getRecommend()
+    this._getDiscList()
   },
   methods: {
-    _getRecommend() {
+    _getRecommend () {
       getRecommend().then(res => {
         if (res.code === ERR_OK) {
-          this.recommends = res.data.slider;
+          this.recommends = res.data.slider
           // console.log(this.recommends)
         }
-      });
+      })
     },
-    _getDiscList(){
+    _getDiscList () {
       getDiscList().then(res => {
         if (res.code === ERR_OK) {
           this.discList = res.data.list
         }
-      });
+      })
     }
   },
   components: {
     Slider,
     Scroll
   }
-};
+}
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '../../common/stylus/variable';
@@ -74,7 +74,6 @@ export default {
   // width: 100%;
   // top: 88px;
   // bottom: 0;
-
   .recommend-content {
     height: 100%;
     overflow: hidden;
@@ -82,10 +81,10 @@ export default {
     .slider-wrapper {
       position: relative;
       width: 100%;
+
       // height: 0;
       // padding-top: 40%;
       // overflow: hidden;
-
       .slider-content {
         position: absolute;
         top: 0;
