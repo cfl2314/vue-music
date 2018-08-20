@@ -1,9 +1,9 @@
-export function hasClass(el, className) {
+export function hasClass (el, className) {
   let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
   return reg.test(el.className)
 }
 
-export function addClass(el, className) {
+export function addClass (el, className) {
   if (hasClass(el, className)) {
     return
   }
@@ -13,7 +13,7 @@ export function addClass(el, className) {
   el.className = newClass.join(' ')
 }
 
-export function getData(el, name, val) {
+export function getData (el, name, val) {
   const prefix = 'data-'
   if (val) {
     return el.setAttribute(prefix + name, val)
@@ -28,7 +28,7 @@ let vendor = (() => {
     webkit: 'webkitTransform',
     Moz: 'MozTransform',
     O: 'OTransform',
-    ms: 'msTransform',
+    ms: 'msTransform', // ie
     standard: 'transform'
   }
 
@@ -41,7 +41,7 @@ let vendor = (() => {
   return false
 })()
 
-export function prefixStyle(style) {
+export function prefixStyle (style) {
   if (vendor === false) {
     return false
   }
