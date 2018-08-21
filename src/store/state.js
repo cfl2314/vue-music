@@ -16,4 +16,4 @@ const state = {
   favoriteList: []
 }
 
-export default state 
+export default state

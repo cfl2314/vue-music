@@ -1,19 +1,12 @@
-export function hasClass (el, className) {
-  let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
-  return reg.test(el.className)
+export function hasClass(el, className) {
+  return el.classList.contains(className)
 }
 
-export function addClass (el, className) {
-  if (hasClass(el, className)) {
-    return
-  }
-
-  let newClass = el.className.split(' ')
-  newClass.push(className)
-  el.className = newClass.join(' ')
+export function addClass(el, className) {
+  el.classList.add(className)
 }
 
-export function getData (el, name, val) {
+export function getData(el, name, val) {
   const prefix = 'data-'
   if (val) {
     return el.setAttribute(prefix + name, val)
@@ -28,7 +21,7 @@ let vendor = (() => {
     webkit: 'webkitTransform',
     Moz: 'MozTransform',
     O: 'OTransform',
-    ms: 'msTransform', // ie
+    ms: 'msTransform',
     standard: 'transform'
   }
 
@@ -41,7 +34,7 @@ let vendor = (() => {
   return false
 })()
 
-export function prefixStyle (style) {
+export function prefixStyle(style) {
   if (vendor === false) {
     return false
   }
