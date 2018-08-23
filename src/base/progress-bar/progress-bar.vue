@@ -22,12 +22,23 @@ export default {
             default:0
         }
     },
+    data(){
+        return{
+            touch:{
+                initiated:true
+            }
+        }
+    },
     create(){
         this.touch={}
     },
     methods:{
         progressClick(e){
-            this._offset(e.offsetX)
+            const rect=this.$refs.progressBar.getBoundingClientRect()
+            const offsetWidth=e.pageX-rect.left
+            this._offset(offsetWidth)
+            // this._offset(e.offsetX)
+            //这里当我们点击progreBtn的时候，e.offsetX获取不对
             this._triggerPercent()
         },
         progressTouchStart(e){
@@ -56,13 +67,13 @@ export default {
             this.$refs.progress.style.width=`${offsetWidth}px`
             this.$refs.progressBtn.style[transform]=`translate3d(${offsetWidth}px,0,0)`
         },
-        setProgressOffset(percent){
-            if(newPercent>=0&&!this.touch.initiated){
-                const barWidth=this.$refs.progressBar.clientWidth-progressBtnWidth
-                const offsetWidth=newPercent*barWidth
-                this._offset(offsetWidth)
+        setProgressOffset(percent) {
+            if (percent >= 0 && !this.touch.initiated) {
+            const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
+            const offsetWidth = percent * barWidth
+            this._offset(offsetWidth)
             }
-        }
+        },
     },
     watch:{
         percent(newPercent){

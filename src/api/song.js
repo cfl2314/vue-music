@@ -5,16 +5,17 @@ import { ERR_OK } from 'api/config'
 
 const debug = process.env.NODE_ENV !== 'production'
 
-export function getLyric(mid) {
-  const url = debug ? '/api/lyric' : 'http://ustbhuangyi.com/music/api/lyric'
+export function getLyric (mid) { // 获取歌词
+  const url = debug ? '/api/lyric' : 'http://ustbhuangyi.com/music/api/lyric' // 代理地址
 
-  const data = Object.assign({}, commonParams, {
+  const data = Object.assign({}, commonParams, { // 传参
     songmid: mid,
     platform: 'yqq',
     hostUin: 0,
     needNewCode: 0,
     categoryId: 10000000,
     pcachetime: +new Date(),
+    // 需要json请求 ,
     format: 'json'
   })
 
@@ -25,7 +26,7 @@ export function getLyric(mid) {
   })
 }
 
-export function getSongsUrl(songs) {
+export function getSongsUrl (songs) {
   const url = debug ? '/api/getPurlUrl' : 'http://ustbhuangyi.com/music/api/getPurlUrl'
 
   let mids = []
@@ -49,7 +50,7 @@ export function getSongsUrl(songs) {
   return new Promise((resolve, reject) => {
     let tryTime = 3
 
-    function request() {
+    function request () {
       return axios.post(url, {
         comm: data,
         url_mid: urlMid
@@ -73,7 +74,7 @@ export function getSongsUrl(songs) {
       })
     }
 
-    function retry() {
+    function retry () {
       if (--tryTime >= 0) {
         request()
       } else {
@@ -85,11 +86,11 @@ export function getSongsUrl(songs) {
   })
 }
 
-function genUrlMid(mids, types) {
+function genUrlMid (mids, types) {
   const guid = getUid()
   return {
     module: 'vkey.GetVkeyServer',
-    method: "CgiGetVkey",
+    method: 'CgiGetVkey',
     param: {
       guid,
       songmid: mids,

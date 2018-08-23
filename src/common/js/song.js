@@ -3,7 +3,7 @@ import { ERR_OK } from 'api/config'
 import { Base64 } from 'js-base64'
 
 export default class Song {
-  constructor({id, mid, singer, name, album, duration, image, url}) {
+  constructor ({id, mid, singer, name, album, duration, image, url}) {
     this.id = id
     this.mid = mid
     this.singer = singer
@@ -15,11 +15,10 @@ export default class Song {
     this.url = url
   }
 
-  getLyric() {
+  getLyric () {
     if (this.lyric) {
       return Promise.resolve(this.lyric)
     }
-
     return new Promise((resolve, reject) => {
       getLyric(this.mid).then((res) => {
         if (res.retcode === ERR_OK) {
@@ -33,7 +32,7 @@ export default class Song {
   }
 }
 
-export function createSong(musicData) {
+export function createSong (musicData) {
   return new Song({
     id: musicData.songid,
     mid: musicData.songmid,
@@ -46,7 +45,7 @@ export function createSong(musicData) {
   })
 }
 
-function filterSinger(singer) {
+function filterSinger (singer) {
   let ret = []
   if (!singer) {
     return ''
@@ -57,11 +56,11 @@ function filterSinger(singer) {
   return ret.join('/')
 }
 
-export function isValidMusic(musicData) {
+export function isValidMusic (musicData) {
   return musicData.songid && musicData.albummid && (!musicData.pay || musicData.pay.payalbumprice === 0)
 }
 
-export function processSongsUrl(songs) {
+export function processSongsUrl (songs) {
   if (!songs.length) {
     return Promise.resolve(songs)
   }
