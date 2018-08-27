@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const debug = process.env.NODE_ENV !== 'production'
 
-export function getHotKey() {
+export function getHotKey () {
   const url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
 
   const data = Object.assign({}, commonParams, {
@@ -16,7 +16,7 @@ export function getHotKey() {
   return jsonp(url, data, options)
 }
 
-export function search(query, page, zhida, perpage) {
+export function search (query, page, zhida, perpage) {
   const url = debug ? '/api/search' : 'http://ustbhuangyi.com/music/api/search'
 
   const data = Object.assign({}, commonParams, {
